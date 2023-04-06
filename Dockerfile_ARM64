@@ -1,5 +1,3 @@
-#skyuk3000/yunohost:latest
-
 FROM arm64v8/debian:11.6
 
 ENV DEBIAN_FRONTEND noninteractive
