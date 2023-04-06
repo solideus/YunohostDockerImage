@@ -9,26 +9,15 @@ With this image, you can use YunoHost like a true instance on physical server wi
 
 **The linux docker host must run systemd.**
 
-### Docker images
-
-#### Supported tags and respective ``Dockerfile`` links
-
- * AMD64
-   * [``latest``,``4.0.8-2`` (Dockerfile)](https://github.com/domainelibre/YunohostDockerImage/blob/master/Dockerfile_AMD64)
- * I386
-   * [``latest``,``4.0.8-2`` (Dockerfile)](https://github.com/domainelibre/YunohostDockerImage/blob/master/Dockerfile_I386)
- * ARMV7
-   * [``latest``,``4.0.8-2`` (Dockerfile)](https://github.com/domainelibre/YunohostDockerImage/blob/master/Dockerfile_ARMV7)
-
-#### Downloading prebuit image
+### Building image
 
 ```
-# image amd64
-docker pull domainelibre/yunohost
-# image i386
-docker pull domainelibre/yunohost-i386
-# image armv7/armhf
-docker pull domainelibre/yunohost-arm
+# clone yunohost install script
+git clone https://github.com/skyuk3000/YunohostDockerImage
+cd YunohostDockerImage
+
+# docker build
+docker build -f Dockerfile_<suffix docker file> -t <your image tag>:build .
 ```
 
 ### Running image
@@ -184,17 +173,6 @@ yunohost backup restore <date backup, ex : 20170430-174149>
 
 ```
 docker rm yunohost
-```
-
-### Building image
-
-```
-# clone yunohost install script
-git clone https://github.com/domainelibre/YunohostDockerImage
-cd YunohostDockerImage
-
-# docker build
-docker build -f Dockerfile_<suffix docker file> -t <your image tag>:build .
 ```
 
 ---
