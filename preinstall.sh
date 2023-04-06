@@ -8,13 +8,14 @@ INSTALL_TYPE=stable
 [ "$1" != "" ] && INSTALL_TYPE=$1
 
 # branche_type
-BRANCHE_TYPE=buster
+BRANCHE_TYPE=bullseye
 [ "$2" != "" ] && BRANCHE_TYPE=$2
 
 # install requirements
 # deprecated : --force-yes
 apt-get update --quiet
-apt-get install -y --no-install-recommends wget apt-utils ssh openssl ca-certificates openssh-server nano vim cron git
+apt-get install -y --no-install-recommends wget apt-utils ssh openssl ca-certificates openssh-server nano vim cron git curl
+
 
 # debug docker context for resolvconf
 # deprecated : --force-yes
@@ -38,6 +39,7 @@ ulimit -n 1024
 
 # do yunohost installation
 cd /tmp/install_script
+chmod +x /tmp/install_script/install_yunohost
 ./install_yunohost -f -a -d $INSTALL_TYPE
 [ "$?" != "0" ] && echo "error while yunohost installation" && exit 1
 
@@ -73,4 +75,3 @@ touch /var/log/mail.log
 
 # cleaning
 apt-get clean
-
