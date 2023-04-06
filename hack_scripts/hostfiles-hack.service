@@ -1,8 +1,0 @@
-[Unit]
-After=sshd.service
-
-[Service]
-ExecStart=/usr/local/bin/hostfiles-hack.sh
-
-[Install]
-WantedBy=default.target
