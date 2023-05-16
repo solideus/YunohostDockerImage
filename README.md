@@ -13,7 +13,7 @@ With this image, you can use YunoHost like a true instance on physical server wi
 
 ```
 # clone yunohost install script
-git clone https://github.com/skyuk3000/YunohostDockerImage
+git clone https://github.com/solideus/YunohostDockerImage/
 cd YunohostDockerImage
 
 # docker build
