@@ -1,4 +1,4 @@
-FROM arm64v8/debian:11.6
+FROM arm64v8/debian:11.7
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -14,5 +14,11 @@ ADD hostfiles-hack.service /etc/systemd/system/
 RUN chmod 664 /etc/systemd/system/hostfiles-hack.service && \
  chmod 744 /usr/local/bin/hostfiles-hack.sh && \
  systemctl enable hostfiles-hack.service
+
+ADD check-resolv.sh /usr/local/bin/
+ADD check-resolv.service /etc/systemd/system/
+RUN chmod 664 /etc/systemd/system/check-resolv.service && \
+ chmod 744 /usr/local/bin/check-resolv.sh && \
+ systemctl enable check-resolv.service
 
 CMD ["/bin/systemd"]

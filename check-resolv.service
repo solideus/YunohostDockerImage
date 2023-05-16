@@ -1,0 +1,8 @@
+[Unit]
+After=sshd.service
+
+[Service]
+ExecStart=/usr/local/bin/check-resolv.sh
+
+[Install]
+WantedBy=default.target

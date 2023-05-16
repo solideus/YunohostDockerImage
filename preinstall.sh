@@ -48,9 +48,9 @@ chmod +x /tmp/install_script/$BRANCHE_TYPE
 [ "$?" != "0" ] && echo "error while yunohost installation" && exit 1
 
 # hack iptables for yunohost in docker
-mv /usr/sbin/iptables /usr/sbin/iptables.ori
-echo -e "#"'!'"/bin/sh\necho \"fake iptables for yunohost inside docker, unusable. For return non failure unix code 0. Bye !\"\nexit 0\n" > /usr/sbin/iptables
-chmod +x /usr/sbin/iptables
+#mv /usr/sbin/iptables /usr/sbin/iptables.ori
+#echo -e "#"'!'"/bin/sh\necho \"fake iptables for yunohost inside docker, unusable. For return non failure unix code 0. Bye !\"\nexit 0\n" > /usr/sbin/iptables
+#chmod +x /usr/sbin/iptables
 
 # remove proxy for systemctl
 rm -f /bin/systemctl
@@ -63,19 +63,22 @@ sed -i '/\/lib\/lsb\/init-functions/a ulimit -n 1024' /etc/init.d/slapd
 adduser admin
 systemctl enable nginx
 systemctl enable yunohost-api
-systemctl enable php7.3-fpm
+systemctl enable php7.4-fpm
 systemctl enable fail2ban
 [ ! -f /etc/fail2ban/filter.d/sshd-ddos.conf ] \
 	&& echo -e "[Definition]\n" > /etc/fail2ban/filter.d/sshd-ddos.conf
 [ ! -f /etc/fail2ban/filter.d/postfix-sasl.conf ] \
         && echo -e "[Definition]\n" > /etc/fail2ban/filter.d/postfix-sasl.conf
 touch /var/log/mail.log
-#systemctl enable dovecot
-#systemctl enable postfix
-#systemctl enable rspamd
+systemctl enable dovecot
+systemctl enable postfix
+systemctl enable rspamd
+systemctl enable dnsmasq
+systemctl enable yunomdns.service
+systemctl enable redis-server
+systemctl enable yunohost-firewall
 #systemctl enable avahi-daemon
-#systemctl enable dnsmasq
-#systemctl enable redis-server
+
 
 # cleaning
 apt-get clean
